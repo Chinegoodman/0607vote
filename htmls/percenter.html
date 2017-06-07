@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>我的</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<link rel="stylesheet" href="../css/reset.css">
+	<link rel="stylesheet" href="../css/samecss.css">
+	<link rel="stylesheet" href="../css/percenter.css">
+	<script src="../js/jquery.min.js"></script>
+	<script>
+		document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5  < 128/3 ? 128/3 : document.documentElement.clientWidth / 7.5 + 'px';
+		window.onresize = function(){
+			document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5  < 128/3 ? 128/3 : document.documentElement.clientWidth / 7.5 + 'px';
+		}
+		console.log(document.documentElement.style.fontSize);
+		/*document.documentElement.style.fontSize = document.documentElement.clientWidth / 4  < 16/5 ? 16/5 : document.documentElement.clientWidth / 4 + 'px';
+		 window.onresize = function(){
+		 document.documentElement.style.fontSize = document.documentElement.clientWidth / 4  < 16/5 ? 16/5 : document.documentElement.clientWidth / 4 + 'px';
+		 }
+		 console.log(document.documentElement.style.fontSize);*/
+	</script>
+</head>
+<body>
+	<div id="appbox">
+		<div id="title" class="clearfloat">
+			<a href="javascript:history.go(-1);"><img src="../images/goback.png" alt="goback"></a>
+			<div class="percenterlink">
+				<!--<a href="percenter.html"><img src="../images/percenter.png" alt="个人中心"></a>-->
+			</div>
+			<p class=" text-center text-grey255">我要报名</p>
+		</div>
+		<div id="tabbox">
+			<ul id="tabboxtitlelis" class="clearfloat">
+				<!--<li class="floatleft tabboxtitle font14" :class="{select:topdata.titlestatus==index}" v-for="(itemtitle,index) in topdata.titles" @click="tabboxtitleclick(index)">{{itemtitle}}</li>-->
+				<li class="floatleft tabboxtitle select">
+					<p>参赛作品</p>
+				</li>
+				<li class="floatleft tabboxtitle">
+					<p>中奖信息</p>
+				</li>
+			</ul>
+			<!--<p class="tabtips font13">( 排名不分先后 )</p>-->
+			<div class="tabboxcontents show">
+
+				<div class="tabcontentli clearfloat">
+					<div class="tabcontentliheaderpic floatleft">
+						<img src="../images/headerpic.jpg" alt="">
+					</div>
+					<div class="tabcontentlicontent floatleft">
+						<p class="tabcontentliname">啊放假</p>
+						<!--<a class="tabcontentlilink floatleft font12" href="">了解TA</a>-->
+						<div class="tabcontentlistory _textoverspecial">
+							投资人故事/投资的故事投资人故事/投资的故事投资人故事/投资的故事投资人故事/投资的故事投资人故事/投资的故事投资人故事/投资的故事
+						</div>
+					</div>
+					<div class="tabcontentlistatus tabcontentlistatus1 floatright">报名成功</div>
+				</div>
+
+
+				<div class="tabcontentli clearfloat">
+					<div class="tabcontentliheaderpic floatleft">
+						<img src="../images/headerpic.jpg" alt="">
+					</div>
+					<div class="tabcontentlicontent floatleft">
+						<p class="tabcontentliname">啊放假</p>
+						<!--<a class="tabcontentlilink floatleft font12" href="">了解TA</a>-->
+						<div class="tabcontentlistory _textoverspecial">
+							投资人故事/投资的故事投资人故事/投资的故事投资人故事/投资的故事投资人故事/投资的故事投资人故事/投资的故事投资人故事/投资的故事
+						</div>
+					</div>
+					<div class="tabcontentlistatus tabcontentlistatus2 floatright">报名失败</div>
+				</div>
+				<div class="tabcontentli clearfloat">
+					<div class="tabcontentliheaderpic floatleft">
+						<img src="../images/headerpic.jpg" alt="">
+					</div>
+					<div class="tabcontentlicontent floatleft">
+						<p class="tabcontentliname">啊放假</p>
+						<!--<a class="tabcontentlilink floatleft font12" href="">了解TA</a>-->
+						<div class="tabcontentlistory _textoverspecial">
+							投资人故事/投资的故事投资人故事/投资的故事投资人故事/投资的故事投资人故事/投资的故事投资人故事/投资的故事投资人故事/投资的故事
+						</div>
+					</div>
+					<div class="tabcontentlistatus tabcontentlistatus2 floatright">审核未通过</div>
+				</div>
+			</div>
+
+		</div>
+
+		<a class="baominglink text-center" href="baoming.html">我要报名</a>
+
+		<div id="fixedbtns">
+			<a class="callphone" href="tel:9527" title="拨打电话">
+				<img src="../images/phone.png" alt="phone">
+			</a>
+			<!--<a class="wirtepen" href="baoming.html" title="报名">
+				<img src="../images/wirtepen.png" alt="pen">
+			</a>-->
+			<a class="uptoappbox" href="#appbox" title="">
+				<img src="../images/uptoappbox.png" alt="uptotop">
+			</a>
+		</div>
+	</div>
+	<script src="../js/percenter.js"></script>
+	<script src="../js/atomaodian.js"></script>
+</body>
+</html>

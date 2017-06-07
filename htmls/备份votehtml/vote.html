@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>模板页面</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<link rel="stylesheet" href="{CSS_PATH}angelvote/css/reset.css">
+	<link rel="stylesheet" href="{CSS_PATH}angelvote/css/samecss.css">
+	<link rel="stylesheet" href="{CSS_PATH}angelvote/css/index.css">
+	<script src="{CSS_PATH}angelvote/js/jquery.min.js"></script>
+	<script>
+		document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5  < 128/3 ? 128/3 : document.documentElement.clientWidth / 7.5 + 'px';
+		window.onresize = function(){
+			document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5  < 128/3 ? 128/3 : document.documentElement.clientWidth / 7.5 + 'px';
+		}
+		console.log(document.documentElement.style.fontSize);
+	</script>
+</head>
+<body>
+{pc:angelvote action="vote"}
+	<div id="appbox">
+
+		<div id="title" class="clearfloat">
+			<a href=""><img src="{CSS_PATH}angelvote/images/goback.png" alt="goback"></a>
+			<p class=" text-center text-grey255">2017.07.07我和天使有个约会</p>
+		</div>
+		<div id="zhutitop" class="clearfloat">
+			<div class="toplinks">
+				<a class="" href=""><img src="{CSS_PATH}angelvote/images/guize.png" alt="规则"></a>
+				<a class="" href=""><img src="{CSS_PATH}angelvote/images/pingwei.png" alt="评委"></a>
+			</div>
+		</div>
+		<div id="supportpoint" class="clearfloat">
+			<div class="supportpointsub floatleft text-grey255 text-center">
+				<p class="">主办单位</p>
+				<span>世界天使投资人大会</span>
+				<span>中国天使投资人学院</span>
+			</div>
+			<div class="supportpointsub floatleft text-grey255 text-center">
+				<p class="">主办单位</p>
+				<span>世界天使投资人大会</span>
+				<span>中国天使投资人学院</span>
+			</div>
+		</div>
+
+		<div id="tabbox">
+			<ul id="tabboxtitlelis" class="clearfloat">
+				<li class="floatleft tabboxtitle  select" onclick="seltype(1)" data_status="{$tdatas['status']}">第一阶段</li>
+				<li class="floatleft tabboxtitle " onclick="seltype(2)" data_status="{$tdatas['status']}">第二阶段</li>
+				<li class="floatleft tabboxtitle " onclick="seltype(3)" data_status="{$tdatas['status']}">第三阶段</li>
+			</ul>
+			<!--<p class="tabtips font13">( 排名不分先后 )</p>-->
+			<div class="tabboxcontents show" id="content">
+
+			 
+			 	{loop $datas $r}
+				<div class="tabcontentli clearfloat">
+						<div class="tabcontentlicode floatleft font12 text-grey255 text-center"><p class="text-center">{$r['id']}</p>号</div>
+						<div class="tabcontentliheaderpic floatleft">
+							<img src="{CSS_PATH}angelvote/images/headerpic.jpg" alt="">
+						</div>
+						<div class="tabcontentlicontent floatleft">
+							<p class="tabcontentliname floatleft ">{$r['name']}</p>
+							<!--<a class="tabcontentlilink floatleft font12" href="">了解TA</a>-->
+							<div class="tabcontentlisupportnumber font12">
+								{$r['des']}
+							</div>
+						</div>
+						<div class="tabcontentlibtn  vote" data_id="{$r['id']}">支持TA</div>
+				</div>
+				{/loop}
+			</div>
+
+			<div id="wechat" class="clearfloat">
+				<div class="wechatimgbox floatleft">
+					<p class="text-center">微信公众号</p>
+					<p class="text-center">马微微</p>
+					<img src="{CSS_PATH}angelvote/images/weixinhao1.png" alt="微信公众号">
+				</div>
+				<div class="wechatimgbox floatleft">
+					<p class="text-center">微信公众号</p>
+					<p class="text-center">马微微</p>
+					<img src="{CSS_PATH}angelvote/images/weixinhao2.png" alt="微信公众号">
+				</div>
+			</div>
+	</div>
+	<script src="{CSS_PATH}angelvote/js/index.js"></script>
+	<script >
+		var status = $('.select').attr("data_status");
+		if(status == 1){
+			alert('红色可点击');
+		}
+		if (status == 2){
+			// 未开始
+			alert('灰色不可点击');
+		}
+		if (status == 3){
+			// 已结束
+			alert('灰色不可点');
+		}
+		$(".select").live('click',function(){
+			status = $(this).attr("data_status");
+			if(status == 1){
+			alert('红色可点击');
+			}
+			if (status == 2){
+				// 未开始
+				alert('灰色不可点击');
+			}
+			if (status == 3){
+				// 已结束
+				alert('灰色不可点');
+			}
+		})
+		
+		$(".vote").live('click',function(){
+			var uid = '';
+			$.ajax({
+				type:"post",
+				url:"{APP_PATH}index.php?m=angelvote&c=index&a=userinfo",
+				data:{dosubmit:1},
+				async:false,
+				dataType:"json",
+				success(data){
+					if(data.status){
+						uid = data.uid;
+					} else {
+						alert(data.msg)
+					}
+				}
+			});
+			var id = $(this).attr("data_id");
+			$.ajax({
+				type:"post",
+				url:"{APP_PATH}index.php?m=angelvote&c=index&a=vote_edit",
+				data:{id:id,uid:uid},
+				async:true,
+				dataType:"json",
+				success(data){
+					alert(data.msg);
+				}
+			});
+
+		})
+		function seltype(type){
+			var type = type;
+			$.ajax({
+				type:"post",
+				url:"{APP_PATH}index.php?m=angelvote&c=index&a=type",
+				data:{type:type},
+				async:true,
+				dataType:"json",
+				success(data){
+					var strs = '';
+					for (var i = 0; i < data.length; i++) {
+						var str = '<div class="tabcontentli clearfloat"><div class="tabcontentlicode floatleft font12 text-grey255 text-center"><p class="text-center">'+data[i].id+'</p>号</div><div class="tabcontentliheaderpic floatleft"><img src="{CSS_PATH}angelvote/images/headerpic.jpg" alt=""></div><div class="tabcontentlicontent floatleft"><p class="tabcontentliname floatleft font17">'+data[i].name+'</p><div class="tabcontentlisupportnumber font12">'+data[i].des+'</div></div><div class="tabcontentlibtn font14 vote" data_id='+data[i].id+'">支持TA</div></div>';
+					strs +=str;
+					}
+		            $('#content').html(strs);
+					
+				}
+			});
+			// $.post("{APP_PATH}index.php?m=angelvote&c=index&a=type",{type:type},function(data){
+   //  			alert(data.str);
+  	// 		});
+		}
+
+
+	</script>
+</body>
+</html>
